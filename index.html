@@ -132,7 +132,17 @@
         <form id="diaryForm">
             <div class="form-group">
                 <label for="title">title</label>
-                <input type="text" id="title" placeholder="제목을 입력하세요 (비워두면 자동 생성)">
+                <input type="text" id="title" placeholder="제목을 입력하세요.">
+            </div>
+
+            <div class="form-group">
+                <label for="categories">카테고리 (선택)</label>
+                <input type="text" id="categories" placeholder="예: first-diary, learning (쉼표로 구분)">
+            </div>
+            
+            <div class="form-group">
+                <label for="tags">태그 (선택)</label>
+                <input type="text" id="tags" placeholder="예: 일상, 생각, 여행 (쉼표로 구분)">
             </div>
             
             <div class="form-group">
@@ -153,6 +163,8 @@
         
         const form = document.getElementById('diaryForm');
         const titleInput = document.getElementById('title');
+        const categoriesInput = document.getElementById('categories');
+        const tagsInput = document.getElementById('tags');
         const contentInput = document.getElementById('content');
         const submitBtn = document.getElementById('submitBtn');
         const messageDiv = document.getElementById('message');
@@ -168,6 +180,8 @@
             e.preventDefault();
             
             const title = titleInput.value.trim();
+            const categories = categoriesInput.value.trim();
+            const tags = tagsInput.value.trim();
             const content = contentInput.value.trim();
             
             if (!content) {
@@ -184,7 +198,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ title, content })
+                    body: JSON.stringify({ title, categories, tags, content })
                 });
                 
                 const data = await response.json();
@@ -217,3 +231,4 @@
 </body>
 
 </html>
+
